@@ -128,7 +128,7 @@ export default (editor, opts = {}) => {
           '<div class="gjs-sm-properties" style="display: none;"></div></div>'
       );
       const traitsProps = traitsSector.find('.gjs-sm-properties');
-      const traits = $('.gjs-trt-traits, .gjs-traits-cs');
+      const traits = $('.gjs-trt-traits, .gjs-traits-c');
 
       if (traits.length) {
         const openTmBtn = pm.getButton('views', 'open-tm');
