@@ -120,6 +120,7 @@ export default (editor, opts = {}) => {
     }
 
     // Load and show settings and style manager
+    /*
     if (!opts.combineSettingsAndSm) {
       const openTmBtn = pm.getButton('views', 'open-tm');
       const openSm = pm.getButton('views', 'open-sm');
@@ -166,6 +167,7 @@ export default (editor, opts = {}) => {
         }
       }
     }
+    */
 
     // Open the default panel
     const openBlocksBtn = editor.Panels.getButton('views', defaultPanel);
