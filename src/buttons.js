@@ -139,18 +139,12 @@ export default (editor, opts = {}) => {
       }
       pm.removeButton('views', 'open-tm');
 
-      console.log(traitsProps);
-      console.log($('.gjs-traits-c'));
-      traitsProps.append($('<div class="test-traits"></div>'));
-      traitsProps.append($('.gjs-traits-c'));
-      // traitsProps.append($('.gjs-trt-traits, .gjs-traits-c'));
-
-      const sectors = $('.gjs-sm-sectors');
+      traitsProps.append($('.gjs-traits-cs'));
 
       // we can only show the Settings, if something in the template is selected
       // otherwise we're trying to append stuff to nothing and get errors
-      if (sectors.length) {
-        sectors.before(traitsSector);
+      if ($('.gjs-sm-sectors').length) {
+        $('.gjs-sm-sectors').before(traitsSector);
         traitsSector.find('.gjs-sm-title').on('click', () => {
           const traitStyle = traitsProps.get(0).style;
           const hidden = traitStyle.display === 'none';
