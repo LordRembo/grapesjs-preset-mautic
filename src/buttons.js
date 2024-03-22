@@ -121,56 +121,57 @@ export default (editor, opts = {}) => {
 
     // Load and show settings and style manager
     if (!opts.combineSettingsAndSm) {
-      // Add Settings Sector
-      const traitsSector = $(
-        '<div class="gjs-sm-sector no-select">' +
-          '<div class="gjs-sm-title"><span class="icon-settings fa fa-cog"></span> Settings</div>' +
-          '<div class="gjs-sm-properties" style="display: none;"></div></div>'
-      );
-      const traitsProps = traitsSector.find('.gjs-sm-properties');
-      // const traits = $('.gjs-trt-traits, .gjs-traits-c');
-      const traits = $('<div class="gjs-traits-empty-c gjs-traits-c" data-no-categories=""></div>');
-      const openTmBtn = pm.getButton('views', 'open-tm');
-      const openSm = pm.getButton('views', 'open-sm');
+      setTimeout(() => {
+        // Add Settings Sector
+        const traitsSector = $(
+          '<div class="gjs-sm-sector no-select">' +
+            '<div class="gjs-sm-title"><span class="icon-settings fa fa-cog"></span> Settings</div>' +
+            '<div class="gjs-sm-properties" style="display: none;"></div></div>'
+        );
+        const traitsProps = traitsSector.find('.gjs-sm-properties');
+        const traits = $('.gjs-trt-traits, .gjs-traits-c');
+        const openTmBtn = pm.getButton('views', 'open-tm');
+        const openSm = pm.getButton('views', 'open-sm');
 
-      if (openTmBtn) {
-        openTmBtn.set('active', 1);
-      }
-      if (openSm) {
-        openSm.set('active', 1);
-      }
-
-      if (traits.length) {
-        pm.removeButton('views', 'open-tm');
-        traitsProps.append(traits);
-
-        const sectors = $('.gjs-sm-sectors');
-
-        // we can only show the Settings, if something in the template is selected
-        // otherwise we're trying to append stuff to nothing and get errors
-        if (sectors.length) {
-          sectors.before(traitsSector);
-          traitsSector.find('.gjs-sm-title').on('click', () => {
-            const traitStyle = traitsProps.get(0).style;
-            const hidden = traitStyle.display === 'none';
-
-            if (hidden) {
-              traitStyle.display = 'block';
-            } else {
-              traitStyle.display = 'none';
-            }
-          });
-
-          // Open settings
-          traitsProps.get(0).style.display = 'block';
+        if (openTmBtn) {
+          openTmBtn.set('active', 1);
         }
-      }
-    }
+        if (openSm) {
+          openSm.set('active', 1);
+        }
 
-    // Open the default panel
-    const openBlocksBtn = editor.Panels.getButton('views', defaultPanel);
-    if (openBlocksBtn) {
-      openBlocksBtn.set('active', 1);
+        if (traits.length) {
+          pm.removeButton('views', 'open-tm');
+          traitsProps.append(traits);
+
+          const sectors = $('.gjs-sm-sectors');
+
+          // we can only show the Settings, if something in the template is selected
+          // otherwise we're trying to append stuff to nothing and get errors
+          if (sectors.length) {
+            sectors.before(traitsSector);
+            traitsSector.find('.gjs-sm-title').on('click', () => {
+              const traitStyle = traitsProps.get(0).style;
+              const hidden = traitStyle.display === 'none';
+
+              if (hidden) {
+                traitStyle.display = 'block';
+              } else {
+                traitStyle.display = 'none';
+              }
+            });
+
+            // Open settings
+            traitsProps.get(0).style.display = 'block';
+          }
+        }
+
+        // Open the default panel
+        const openBlocksBtn = editor.Panels.getButton('views', defaultPanel);
+        if (openBlocksBtn) {
+          openBlocksBtn.set('active', 1);
+        }
+      }, 2000);
     }
   });
 
