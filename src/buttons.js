@@ -120,19 +120,7 @@ export default (editor, opts = {}) => {
     }
 
     // Load and show settings and style manager
-    /*
     if (!opts.combineSettingsAndSm) {
-      const openTmBtn = pm.getButton('views', 'open-tm');
-      const openSm = pm.getButton('views', 'open-sm');
-      if (openTmBtn) {
-        openTmBtn.set('active', 1);
-      }
-      if (openSm) {
-        openSm.set('active', 1);
-      }
-
-      pm.removeButton('views', 'open-tm');
-
       // Add Settings Sector
       const traitsSector = $(
         '<div class="gjs-sm-sector no-select">' +
@@ -140,9 +128,21 @@ export default (editor, opts = {}) => {
           '<div class="gjs-sm-properties" style="display: none;"></div></div>'
       );
       const traitsProps = traitsSector.find('.gjs-sm-properties');
-      const traits = $('.gjs-trt-traits');
+      const traits = $('.gjs-trt-traits, .gjs-traits-cs');
 
-      if (traitsProps.length && traits.length) {
+      if (traits.length) {
+        const openTmBtn = pm.getButton('views', 'open-tm');
+        const openSm = pm.getButton('views', 'open-sm');
+
+        if (openTmBtn) {
+          openTmBtn.set('active', 1);
+        }
+        if (openSm) {
+          openSm.set('active', 1);
+        }
+
+        pm.removeButton('views', 'open-tm');
+
         traitsProps.append(traits);
 
         const sectors = $('.gjs-sm-sectors');
@@ -167,7 +167,6 @@ export default (editor, opts = {}) => {
         }
       }
     }
-    */
 
     // Open the default panel
     const openBlocksBtn = editor.Panels.getButton('views', defaultPanel);
