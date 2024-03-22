@@ -9,15 +9,15 @@ export default class BlocksMjml {
   }
 
   addBlocks() {
-    const sections37 = `<mj-column width="30%"><mj-text>Content 1</mj-text></mj-column>
-        <mj-column width="70%"><mj-text>Content 2</mj-text></mj-column>`;
+    // const sections37 = `<mj-column width="30%"><mj-text>Content 1</mj-text></mj-column>
+    //     <mj-column width="70%"><mj-text>Content 2</mj-text></mj-column>`;
 
-    this.blockManager.add('mj-37-columns', {
-      label: Mautic.translate('grapesjsbuilder.components.names.twoColumnThirdSevens'),
-      category: Mautic.translate('grapesjsbuilder.categorySectionLabel'),
-      attributes: { class: 'gjs-fonts gjs-f-b37' },
-      content: `<mj-section>${sections37}</mj-section>`,
-    });
+    // this.blockManager.add('mj-37-columns', {
+    //   label: Mautic.translate('grapesjsbuilder.components.names.twoColumnThirdSevens'),
+    //   category: Mautic.translate('grapesjsbuilder.categorySectionLabel'),
+    //   attributes: { class: 'gjs-fonts gjs-f-b37' },
+    //   content: `<mj-section>${sections37}</mj-section>`,
+    // });
 
     const textSect = `<mj-column>
           <mj-text font-size="18px" font-weight="bold">
