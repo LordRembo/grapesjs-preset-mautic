@@ -8,8 +8,7 @@ export default ((editor, opts = {}) => {
   const mode = ContentService.getMode(editor);
 
   if (mode === ContentService.modeEmailMjml) {
-    const blockMjml = new BlocksMjml(editor);
-    blockMjml.addBlocks();
+    const blockMjml = new BlocksMjml(editor); // blockMjml.addBlocks();
   } // a add button block for landing page
 
 
