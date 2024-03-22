@@ -142,12 +142,12 @@ export default ((editor, opts = {}) => {
       const traitsProps = traitsSector.find('.gjs-sm-properties');
       const traits = $('.gjs-trt-traits');
 
-      if (typeof traitsProps !== 'undefined' && typeof traits !== 'undefined') {
+      if (traitsProps.length && traits.length) {
         traitsProps.append(traits);
         const sectors = $('.gjs-sm-sectors'); // we can only show the Settings, if something in the template is selected
         // otherwise we're trying to append stuff to nothing and get errors
 
-        if (typeof sectors !== 'undefined') {
+        if (sectors.length) {
           sectors.before(traitsSector);
           traitsSector.find('.gjs-sm-title').on('click', () => {
             const traitStyle = traitsProps.get(0).style;
