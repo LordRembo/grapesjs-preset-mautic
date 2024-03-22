@@ -19,7 +19,10 @@ export default class BlocksMjml {
       attributes: {
         class: 'gjs-fonts gjs-f-b37'
       },
-      content: `<mj-section>${sections37}</mj-section>`
+      content: `<mj-section>${sections37}</mj-section>`,
+      media: `"<svg viewBox="0 0 24 24">
+        <path fill="currentColor" d="M2 20h5V4H2v16Zm-1 0V4a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1ZM10 20h12V4H10v16Zm-1 0V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1Z"></path>
+      </svg>"`
     });
     const textSect = `<mj-column>
           <mj-text font-size="18px" font-weight="bold">
