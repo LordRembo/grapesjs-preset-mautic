@@ -128,7 +128,6 @@ export default (editor, opts = {}) => {
           '<div class="gjs-sm-properties" style="display: none;"></div></div>'
       );
       const traitsProps = traitsSector.find('.gjs-sm-properties');
-      const traits = $('.gjs-trt-traits, .gjs-traits-c');
       const openTmBtn = pm.getButton('views', 'open-tm');
       const openSm = pm.getButton('views', 'open-sm');
 
@@ -140,15 +139,11 @@ export default (editor, opts = {}) => {
       }
       pm.removeButton('views', 'open-tm');
 
-      console.log($('.gjs-pn-views-container').length);
-      console.log($('.gjs-sm-header').length);
-      console.log($('.gjs-traits-cs').length);
-      console.log($('.gjs-traits-c').length);
-      console.log('traitsProps? ' + traitsProps.length);
-      console.log('traits? ' + traits.length);
-      console.log('traitsProps type? ' + typeof traitsProps);
-      console.log('traits type? ' + typeof traits);
-      traitsProps.append(traits);
+      console.log(traitsProps);
+      console.log($('.gjs-traits-c'));
+      traitsProps.append($('<div class="test-traits"></div>'));
+      traitsProps.append($('.gjs-traits-c'));
+      // traitsProps.append($('.gjs-trt-traits, .gjs-traits-c'));
 
       const sectors = $('.gjs-sm-sectors');
 
