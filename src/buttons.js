@@ -129,20 +129,18 @@ export default (editor, opts = {}) => {
       );
       const traitsProps = traitsSector.find('.gjs-sm-properties');
       const traits = $('.gjs-trt-traits, .gjs-traits-c');
+      const openTmBtn = pm.getButton('views', 'open-tm');
+      const openSm = pm.getButton('views', 'open-sm');
+
+      if (openTmBtn) {
+        openTmBtn.set('active', 1);
+      }
+      if (openSm) {
+        openSm.set('active', 1);
+      }
 
       if (traits.length) {
-        const openTmBtn = pm.getButton('views', 'open-tm');
-        const openSm = pm.getButton('views', 'open-sm');
-
-        if (openTmBtn) {
-          openTmBtn.set('active', 1);
-        }
-        if (openSm) {
-          openSm.set('active', 1);
-        }
-
         pm.removeButton('views', 'open-tm');
-
         traitsProps.append(traits);
 
         const sectors = $('.gjs-sm-sectors');

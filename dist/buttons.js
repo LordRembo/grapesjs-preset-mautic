@@ -129,19 +129,18 @@ export default ((editor, opts = {}) => {
       const traitsSector = $('<div class="gjs-sm-sector no-select">' + '<div class="gjs-sm-title"><span class="icon-settings fa fa-cog"></span> Settings</div>' + '<div class="gjs-sm-properties" style="display: none;"></div></div>');
       const traitsProps = traitsSector.find('.gjs-sm-properties');
       const traits = $('.gjs-trt-traits, .gjs-traits-c');
+      const openTmBtn = pm.getButton('views', 'open-tm');
+      const openSm = pm.getButton('views', 'open-sm');
+
+      if (openTmBtn) {
+        openTmBtn.set('active', 1);
+      }
+
+      if (openSm) {
+        openSm.set('active', 1);
+      }
 
       if (traits.length) {
-        const openTmBtn = pm.getButton('views', 'open-tm');
-        const openSm = pm.getButton('views', 'open-sm');
-
-        if (openTmBtn) {
-          openTmBtn.set('active', 1);
-        }
-
-        if (openSm) {
-          openSm.set('active', 1);
-        }
-
         pm.removeButton('views', 'open-tm');
         traitsProps.append(traits);
         const sectors = $('.gjs-sm-sectors'); // we can only show the Settings, if something in the template is selected
