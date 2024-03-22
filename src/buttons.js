@@ -144,6 +144,10 @@ export default (editor, opts = {}) => {
       console.log($('.gjs-sm-header').length);
       console.log($('.gjs-traits-cs').length);
       console.log($('.gjs-traits-c').length);
+      console.log('traitsProps? ' + traitsProps.length);
+      console.log('traits? ' + traits.length);
+      console.log('traitsProps type? ' + typeof traitsProps);
+      console.log('traits type? ' + typeof traits);
       traitsProps.append(traits);
 
       const sectors = $('.gjs-sm-sectors');
