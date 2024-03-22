@@ -131,6 +131,7 @@ export default (editor, opts = {}) => {
       const traits = $('.gjs-trt-traits, .gjs-traits-c');
       const openTmBtn = pm.getButton('views', 'open-tm');
       const openSm = pm.getButton('views', 'open-sm');
+      const traitsDiv = document.querySelector('.gjs-trt-traits, .gjs-traits-c');
 
       if (openTmBtn) {
         openTmBtn.set('active', 1);
@@ -138,6 +139,8 @@ export default (editor, opts = {}) => {
       if (openSm) {
         openSm.set('active', 1);
       }
+      console.log(traitsDiv);
+      console.log(traits);
 
       if (traits.length) {
         pm.removeButton('views', 'open-tm');
