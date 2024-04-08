@@ -20,15 +20,18 @@ export default class DynamicContentCommands {
 
   stopDynamicContentPopup() {
     // Destroy Dynamic Content editors and write the contents to the textarea
-    var logger = this.logger;
+    // eslint-disable-next-line prefer-destructuring
+    const logger = this.logger; // eslint-disable-next-line no-undef
 
-    if (ckEditors != undefined && ckEditors.size > 0) {
-      ckEditors.forEach(function (value, key, map) {
+    if (typeof ckEditors !== 'undefined' && ckEditors.size > 0) {
+      // eslint-disable-next-line no-undef
+      ckEditors.forEach((value, key, map) => {
         const name = key.id;
 
         if (name.includes('dynamicContent')) {
           logger.debug(`Destroying Dynamic Content editor: ${name}`);
-          map.get(key).destroy();
+          map.get(key).destroy(); // eslint-disable-next-line no-undef
+
           ckEditors.delete(key);
         }
       });
