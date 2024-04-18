@@ -71,7 +71,7 @@ export default class ButtonApplyCommand {
       if (response.route) {
         // update URL in address bar
         MauticVars.manualStateChange = false;
-        History.pushState(null, 'Mautic', response.route); // update Title
+        history.pushState(null, 'Mautic', response.route); // update Title
 
         Mautic.generatePageTitle(response.route);
       } // update form action
@@ -134,12 +134,14 @@ export default class ButtonApplyCommand {
       let formEmailSubject = ButtonsService.getElementValue('emailform_subject');
       let formEmailName = ButtonsService.getElementValue('emailform_name');
 
-      if (formEmailSubject.lenght === 0) {
+      if (formEmailSubject.length === 0) {
         formEmailSubject = ButtonsService.getDefaultValue(mode.split('-')[0]);
+        ButtonsService.setElementValue('emailform_subject', formEmailSubject);
       }
 
       if (formEmailName.length === 0) {
         formEmailName = ButtonsService.getDefaultValue(mode.split('-')[0]);
+        ButtonsService.setElementValue('emailform_name', formEmailName);
       }
     }
 
@@ -148,6 +150,7 @@ export default class ButtonApplyCommand {
 
       if (formPageTitle.length === 0) {
         formPageTitle = ButtonsService.getDefaultValue(mode.split('-')[0]);
+        ButtonsService.setElementValue('page_title', formPageTitle);
       }
     }
   }

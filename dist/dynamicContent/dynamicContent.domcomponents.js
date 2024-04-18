@@ -13,21 +13,29 @@ export default class DynamicContentDomComponents {
     const tagName = ContentService.isMjmlMode(editor) ? 'mj-text' : 'div';
     const baseType = dc.getType(baseTypeName);
     const baseModel = baseType.model;
-    const model = {
-      defaults: {
-        name: 'Dynamic Content',
-        tagName,
-        draggable: '[data-gjs-type=cell],[data-gjs-type=mj-column]',
-        droppable: false,
-        editable: false,
-        stylable: false,
-        propagate: ['droppable', 'editable'],
-        attributes: {
-          'data-gjs-type': 'dynamic-content',
-          // Type for GrapesJS
-          'data-slot': 'dynamicContent' // used to find the DC component on the canvas for e.g. token transformation
-
+    const dynamicContentModel = {
+      name: 'Dynamic Content',
+      tagName,
+      draggable: '[data-gjs-type=cell],[data-gjs-type=mj-column]',
+      droppable: false,
+      editable: false,
+      stylable: false,
+      propagate: ['droppable', 'editable'],
+      style: { ...baseModel.prototype.defaults['style-default'],
+        ...{
+          display: 'block'
         }
+      },
+      attributes: {
+        'data-gjs-type': 'dynamic-content',
+        // Type for GrapesJS
+        'data-slot': 'dynamicContent' // used to find the DC component on the canvas for e.g. token transformation
+
+      }
+    };
+    const model = {
+      defaults: { ...baseModel.prototype.defaults,
+        ...dynamicContentModel
       },
 
       /**
@@ -51,26 +59,23 @@ export default class DynamicContentDomComponents {
             }
           });
         }
-      },
-
-      // @todo: show the store items default content on the canvas
+      } // @todo: show the store items default content on the canvas
       // updated(property, value, prevValue) {
-      //   console.log('Local hook: model.updated', {
+      //   console.debug('Local hook: model.updated', {
       //     property,
       //     value,
       //     prevValue,
       //   });
       // },
-      // Dynamic Content component detection
-      isComponent(el) {
-        if (el.getAttribute && el.getAttribute('data-slot') === 'dynamicContent') {
-          return {
-            type: 'dynamic-content'
-          };
-        }
+      // does not work: gets removed when Sorting (by grapesjs)
+      // removed() {
+      //   // Delete dynamic-content on Mautic side
+      //   const component = this.model;
+      //   this.em
+      //     .get('Commands')
+      //     .run('preset-mautic:dynamic-content-delete-store-item', { component });
+      // },
 
-        return false;
-      }
 
     };
     const view = {
@@ -82,12 +87,19 @@ export default class DynamicContentDomComponents {
       },
 
       // replace token with human readable view
-      onRender(el) {
+      // eslint-disable-next-line no-shadow
+      onRender({
+        editor,
+        model
+      }) {
         const dcService = new DynamicContentService(editor);
-        const decId = DynamicContentService.getDataParamDecid(el.model);
+        const decId = DynamicContentService.getDataParamDecid(model);
         const dcItem = dcService.getStoreItem(decId);
-        this.el.innerHTML = dcItem.content;
-        dcService.logger.debug('DC: Updated view', dcItem);
+
+        if (typeof dcItem !== 'undefined') {
+          this.el.innerHTML = dcItem.content;
+          dcService.logger.debug('DC: Updated view', dcItem);
+        }
       },
 
       // open the dynamic content modal if the editor is added or double clicked
@@ -97,19 +109,21 @@ export default class DynamicContentDomComponents {
         this.em.get('Commands').run('preset-mautic:dynamic-content-open', {
           target
         });
-      } // does not work: gets removed when Sorting (by grapesjs)
-      // removed() {
-      //   // Delete dynamic-content on Mautic side
-      //   const component = this.model;
-      //   this.em
-      //     .get('Commands')
-      //     .run('preset-mautic:dynamic-content-delete-store-item', { component });
-      // },
-
+      }
 
     }; // add the Dynamic Content component
 
     dc.addType('dynamic-content', {
+      // Dynamic Content component detection
+      isComponent: el => {
+        if (typeof el.getAttribute !== 'undefined' && el.getAttribute('data-slot') === 'dynamicContent') {
+          return {
+            type: 'dynamic-content'
+          };
+        }
+
+        return false;
+      },
       model,
       view
     });
