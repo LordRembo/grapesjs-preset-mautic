@@ -121,17 +121,6 @@ export default (editor, opts = {}) => {
 
     // Load and show settings and style manager
     if (!opts.combineSettingsAndSm) {
-      const openTmBtn = pm.getButton('views', 'open-tm');
-      const openSm = pm.getButton('views', 'open-sm');
-      if (openTmBtn) {
-        openTmBtn.set('active', 1);
-      }
-      if (openSm) {
-        openSm.set('active', 1);
-      }
-
-      pm.removeButton('views', 'open-tm');
-
       // Add Settings Sector
       const traitsSector = $(
         '<div class="gjs-sm-sector no-select">' +
@@ -139,22 +128,37 @@ export default (editor, opts = {}) => {
           '<div class="gjs-sm-properties" style="display: none;"></div></div>'
       );
       const traitsProps = traitsSector.find('.gjs-sm-properties');
+      const openTmBtn = pm.getButton('views', 'open-tm');
+      const openSm = pm.getButton('views', 'open-sm');
 
-      traitsProps.append($('.gjs-trt-traits'));
-      $('.gjs-sm-sectors').before(traitsSector);
-      traitsSector.find('.gjs-sm-title').on('click', () => {
-        const traitStyle = traitsProps.get(0).style;
-        const hidden = traitStyle.display === 'none';
+      if (openTmBtn) {
+        openTmBtn.set('active', 1);
+      }
+      if (openSm) {
+        openSm.set('active', 1);
+      }
+      pm.removeButton('views', 'open-tm');
 
-        if (hidden) {
-          traitStyle.display = 'block';
-        } else {
-          traitStyle.display = 'none';
-        }
-      });
+      traitsProps.append($('.gjs-traits-cs'));
 
-      // Open settings
-      traitsProps.get(0).style.display = 'block';
+      // we can only show the Settings, if something in the template is selected
+      // otherwise we're trying to append stuff to nothing and get errors
+      if ($('.gjs-sm-sectors').length) {
+        $('.gjs-sm-sectors').before(traitsSector);
+        traitsSector.find('.gjs-sm-title').on('click', () => {
+          const traitStyle = traitsProps.get(0).style;
+          const hidden = traitStyle.display === 'none';
+
+          if (hidden) {
+            traitStyle.display = 'block';
+          } else {
+            traitStyle.display = 'none';
+          }
+        });
+
+        // Open settings
+        traitsProps.get(0).style.display = 'block';
+      }
     }
 
     // Open the default panel
